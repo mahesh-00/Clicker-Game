@@ -31,7 +31,10 @@ namespace Clicker
         // Start is called before the first frame update
         void Awake()
         {
-            _instance = this;
+            if(_instance==null)
+                _instance = this;
+            else
+                Destroy(this);
             GameManager.Instance.OnGameStateChanged += HandleGameStateChangeUI;
             //OnMenuClicked+= OpenStartMenu;
         }

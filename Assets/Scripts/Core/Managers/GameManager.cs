@@ -9,18 +9,18 @@ namespace Clicker
     {
         #region Static fields
         private static GameManager _instance;
-       
+
         #endregion
-        
+
         #region Properties
-         public static GameManager Instance => _instance;
-         public bool IsGameStarted
+        public static GameManager Instance => _instance;
+        public bool IsGameStarted
         {
-            get {return _isGameStarted;}
+            get { return _isGameStarted; }
             set
             {
                 _isGameStarted = value;
-                if(value)
+                if (value)
                 {
                     ChangeState(GameState.GamePlayState);
                 }
@@ -28,7 +28,7 @@ namespace Clicker
 
         }
         #endregion
-       
+
         #region Other variables
         public enum GameState
         {
@@ -36,25 +36,27 @@ namespace Clicker
             GamePlayState,
             GameCompleteState
         }
-        
+
         private GameState _currentGameState;
         private bool _isGameStarted = false;
         public Action<GameState> OnGameStateChanged;
         #endregion
-       
 
-       #region Monobehaviour
+        #region Monobehaviour
         private void Awake()
         {
-            _instance = this;
+            if (_instance == null)
+                _instance = this;
+            else
+                Destroy(this);
             Application.targetFrameRate = 300;
-            
+
         }
         // Start is called before the first frame update
         void Start()
         {
             ChangeState(GameState.StartMenuState);
-            Screen.SetResolution(1080,1920,true);
+            Screen.SetResolution(1080, 1920, true);
         }
         #endregion
 
@@ -82,17 +84,17 @@ namespace Clicker
 
         private void HandleLevelCompleteState()
         {
-            
+
         }
 
         private void HandleStartMenuState()
         {
-            
+
         }
 
         private void HandleGameplayState()
         {
-            
+
         }
         #endregion
 
